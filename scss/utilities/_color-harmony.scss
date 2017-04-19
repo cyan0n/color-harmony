@@ -1,0 +1,75 @@
+$color-foreground: $white !default;
+$color-background: $black !default;
+
+/*
+	mono, complementary, analogous*, split-complimentary*, triadic*, tetratic*, square*, ?custom?
+	* can be clockwise or anti-clockwise
+*/
+@function color($color: base, $modifiers: none, $harmony: $color-harmony, $base: $color-base, $hue: $offset-hue) {
+	$result: $base;
+
+	@if $harmony == square {
+		$harmony: tetradic;
+		$hue: 90;
+	} @else if $harmony == triadic {
+		$harmony: analogous;
+		$hue: 120;
+	} @else if $harmony == split-complimentary {
+		$harmony: analogous;
+		$hue: 180 - $hue;
+	}
+
+	@if $color == seconday or $color == 2 {
+		@if $harmony == mono {
+			@if lightness($result) > 50% {
+				$result: shade($result, $offset-light);
+			} @else {
+				$result: tint($result, $offset-light);
+			}
+		} @else if $harmony == complementary or $harmony == tetradic {
+			$result: ryb-complement($result);
+		} @else if $harmony == analogous {
+			$result: ryb-adjust-hue($result, $hue);
+		}
+	} @else if $color == tertiary or $color == 3 {
+		@if $harmony == tetradic {
+			$result: ryb-adjust-hue($result, $hue);
+		} @else if $harmony == analogous {
+			$result: ryb-adjust-hue($result, -$hue);
+		}
+	} @else if $color == quadrary or $color == 4 {
+		@if $harmony == mono {
+			@if lightness($result) > 50% {
+				$result: shade($result, $offset-light);
+			} @else {
+				$result: tint($result, $offset-light);
+			}
+		} @else if $harmony == complementary {
+			$result: ryb-complement($result);
+		} @else if $harmony == tetradic {
+			$result: ryb-adjust-hue($result, 180 + $hue);
+		}
+	} @else if $color == foreground or $color == fore {
+
+	} @else if $color == background or $color == back {
+
+	} @else if map-has-key($color-wheel, $color) {
+		$result: map-get($color-wheel, $color);
+	} @else if $color != base and $color != 1{
+		@error "$color not recognized, was #{$color}";
+	}
+
+	// Modifiers: light, dark, bright, dim
+	@if index($modifiers, dark) {
+
+	} @else if index($modifiers, light) {
+
+	}
+	@if index($modifiers, bright) {
+		$result: saturate($result, 30);
+	} @else if index($modifiers, dim) {
+		$result: saturate($result, -30);
+	}
+
+	@return $result;
+}

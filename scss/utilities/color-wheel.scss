@@ -1,0 +1,23 @@
+$black: #000 !default;
+$grey: #666 !default;
+$white: #fff !default;
+
+$red-hue: strip-unit(((ryb-hue($color-base) + 15) % 30) - 15);
+
+$color-wheel: (
+  red: set-ryb-hue($color-base, $red-hue),
+  orange: set-ryb-hue($color-base, $red-hue + 30),
+	amber: set-ryb-hue($color-base, $red-hue + 60),
+	gold: set-ryb-hue($color-base, $red-hue + 90),
+	yellow: set-ryb-hue($color-base, $red-hue + 120),
+	lime: set-ryb-hue($color-base, $red-hue + 150),
+	green: set-ryb-hue($color-base, $red-hue + 180),
+	cyan: set-ryb-hue($color-base, $red-hue + 210),
+	blue: set-ryb-hue($color-base, $red-hue + 240),
+	indigo: set-ryb-hue($color-base, $red-hue + 270),
+	purple: set-ryb-hue($color-base, $red-hue + 300),
+	magenta: set-ryb-hue($color-base, $red-hue + 330),
+	black: $black,
+	grey: $grey,
+	white: $white
+);

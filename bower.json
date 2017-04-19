@@ -1,0 +1,28 @@
+{
+  "name": "color-harmony",
+  "description": "Some sass to create color-schemes, color-harmonies and color-wheels.",
+  "main": "scss/_main.scss",
+  "version": "0.0.1",
+  "keywords": [
+    "sass",
+    "scss",
+    "color",
+    "harmony",
+    "color-wheel"
+  ],
+  "authors": [
+    "cyan0n"
+  ],
+  "license": "MIT",
+  "homepage": "",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "scss-blend-modes": "git://github.com/heygrady/scss-blend-modes.git"
+  }
+}
